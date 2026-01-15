@@ -1,0 +1,24 @@
+{
+    "permissions": {
+      "allow": [
+        "Read",
+        "Write",
+        "Bash",
+        "WebFetch",
+        "WebSearch",
+        "mcp__ide",
+        "mcp__sequential-thinking",
+        "mcp__context7",
+        "mcp__shrimp-task-manager"
+      ],
+      "deny": [],
+      "ask": []
+    },
+    "enableAllProjectMcpServers": true,
+    "enabledMcpjsonServers": [
+        "ide",
+        "context7",
+        "sequential-thinking",
+        "shrimp-task-manager"
+    ]
+  }
