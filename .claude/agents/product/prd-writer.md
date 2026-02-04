@@ -309,3 +309,80 @@ S-T-D는 데이터 모델이 아니라 의사의 진료 사고 흐름을 설명�
 * [ ] `tenant_id` 기반 격리 원칙이 모든 데이터 요구사항에 반영되었는가?
 * [ ] 의학적 판단이 필요한 영역이 **P-REQ**로 명확히 분리되었는가?
 * [ ] 구현 기술 스택이 JPA/Querydsl/JWT 기반으로 명시되었는가?
+
+## 11. Feature PRD (기능 단위 PRD)
+
+Feature PRD는 Product PRD(SoT)를 대체하지 않는 **보조 산출물**이며, 단일 기능(Fxxx)에 대한 구현 판단 기준을 직군 간에 공유하기 위한 문서이다.
+
+### 11.1 Feature PRD 생성 원칙
+
+Feature PRD는 사용자의 **명시적인 요청이 있을 때만** 생성되는 **선택적 보조 산출물**이다. Product PRD 작성 과정에서 기능(Fxxx)이 정의되더라도, Feature PRD는 기본 산출물이 아니다.
+
+PRD-writer는 아래 조건이 충족되더라도, 사용자의 요청이 없는 한 Feature PRD를 생성하지 않는다.
+
+- 구현 복잡도가 높아 보이는 경우
+- 분기 또는 엣지 케이스가 많아 보이는 경우
+- 정책 판단이 필요해 보이는 경우
+
+위 상황에서는 Feature PRD 생성을 **제안할 수는 있으나**, 사용자의 명시적 승인 없이는 생성하지 않는다.
+
+PRD-writer가 사용할 수 있는 제안 표현 예시는 다음과 같다.
+
+- “해당 기능은 분기와 정책 판단이 포함되어 있어 Feature PRD로 분리하면 좋겠습니다.”
+- “요청 주시면 Feature PRD(F0xx)를 생성하겠습니다.”
+
+사용자의 명시적 요청 없이 Feature PRD를 선제적으로 생성하는 것은 금지한다.
+
+**[명시적 요청]**
+
+Feature PRD 요청은 반드시 아래 조건을 만족해야 한다.
+
+- 대상 기능 ID(Fxxx)가 명시되어야 한다.
+- "Feature PRD" 또는 "기능 단위 PRD"라는 표현이 포함되어야 한다.
+
+위 조건이 충족되지 않은 요청은
+Product PRD 요청으로 간주한다.
+
+### 11.2 Feature PRD 작성 시 필수 제약
+
+Feature PRD는 다음 제약을 반드시 따른다.
+
+- Feature PRD는 **하나의 기능 ID(Fxxx)** 에만 대응해야 한다.
+- Feature PRD는 Product PRD의 기능 명세(Fxxx)와 **정합성**을 유지해야 한다.
+- Feature PRD에서 새로운 제품 핵심 규약을 추가하거나,
+  전체 사용자 여정을 재정의하지 않는다.
+- 정책 판단이 필요한 경우 결론을 내리지 않고
+  **P-REQ-xxx로 봉인**한다.
+
+### 11.3 Feature PRD 필수 섹션 (고정)
+
+Feature PRD에는 반드시 아래 8개 섹션이 포함되어야 한다.
+
+1. Context / 목적
+2. 사용자 & 사용 시점 (Who / When)
+3. 사용자 플로우 (User Flow)
+   1. 기본 흐름 (Happy Path)
+   2. 주요 분기 (최대 2개)
+4. 기능 동작 규칙 (Behavior Rules)
+5. 엣지 케이스 & 실패 시 UX
+6. UX/UI 가이드 (디자인 기준)
+7. Contract (FE ↔ BE / Event)
+   1. FE ↔ BE
+   2. 벤트/연동 (있는 경우)
+8. Done 기준 (Acceptance Criteria)
+9. 오픈 질문 / 정책 요청 (있다면)
+
+### 11.4 Feature PRD 금지 사항
+
+* 전체 사용자 여정 재정의
+* 제품 핵심 규약 추가/변경
+* Fxxx 외 기능을 기준으로 한 판단
+* DB 테이블/컬럼 상세
+* 클래스/메서드 시그니처 및 구현 로직 상세
+
+### 11.5 Feature PRD 저장 위치 및 템플릿 분리
+
+* Feature PRD 저장 위치:
+  * `docs/10-product/12-feature/`
+* Feature PRD 템플릿 파일(정의서와 분리):
+  * `docs/10-product/12-feature/template/feature-prd-template.md`
